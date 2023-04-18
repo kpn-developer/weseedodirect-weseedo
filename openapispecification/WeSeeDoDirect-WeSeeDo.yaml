@@ -1,0 +1,2769 @@
+openapi: 3.0.0
+info:
+  title: 'WeSeeDo Direct - WeSeeDo'
+  version: WeSeeDo-Direct-v2
+  description: >-
+    WeSeeDo Direct API allows you to set up a video communication channel between people by sending an SMS with a link to the meeting. 
+    This API specification is for version 2 of the API.
+    
+     ### Key highlights
+
+    - **Sandbox:** Full-fledged capabilities.
+
+    - **Security:**  HTTPS, OAuth, Rate limit.
+
+    - **Versioning:**  Supports version-less API, version tight. If no version
+    is provided (in the header) it defaults to latest version. 
+
+    ---
+    ## [KPN Developer](https://developer.kpn.com/)<br/>
+    [Getting Started](https://developer.kpn.com/getting-started)
+    
+    ---
+    
+  contact:
+    name: API Support
+    email: api_developer@kpn.com
+    url: 'https://developer.kpn.com/support'
+  termsOfService: 'https://developer.kpn.com/legal'
+servers:
+  - description: SwaggerHub API URL
+    url: https://api-prd.kpn.com/communication/weseedo/weseedodirect
+externalDocs:
+  description: HTTP response headers
+  url: https://developer.kpn.com/documentation-response-headers
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api-prd.kpn.com/oauth/client_credential/accesstoken?grant_type=client_credentials
+          scopes: {}
+  responses:
+    bad_gateway:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Bad gateway
+    bad_request:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Bad request
+    forbidden:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Forbidden
+    method_not_allowed:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Method not allowed
+    not_found:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Not found
+    precondition_failed:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Precondition failed
+    server_error:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Server error
+    service_unavailable:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Service unavailable
+    too_many:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Too many requests
+    unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Unauthorized
+    AuthAutoLoginUserObject:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                $ref: '#/components/schemas/AuthResponseAutoLoginUser'
+          examples:
+            Example:
+              $ref: '#/components/examples/AuthResponseAutoLoginUserObjectSchema'
+    MeetingObjectArray:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MeetingResponse'
+          examples:
+            Example:
+              $ref: '#/components/examples/MeetingResponseObjectArraySchema'
+    MeetingObject:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                $ref: '#/components/schemas/MeetingResponse'
+          examples:
+            Example:
+              $ref: '#/components/examples/MeetingResponseObjectSchema'
+    MeetingDeletedObject:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                $ref: '#/components/schemas/MeetingDeletedResponse'
+          examples:
+            Example:
+              $ref: '#/components/examples/MeetingResponseDeletedObjectSchema'
+    MeetingSmsObject:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                $ref: '#/components/schemas/MeetingSmsResponse'
+          examples:
+            Example:
+              $ref: '#/components/examples/MeetingSmsResponseObjectSchema'
+    MeetingChatFileObject:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                $ref: '#/components/schemas/MeetingChatFileResponse'
+          examples:
+            Example:
+              $ref: '#/components/examples/MeetingChatFileResponseObjectSchema'
+    ProductMeetingObject:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                $ref: '#/components/schemas/ProductMeetingResponse'
+          examples:
+            Example:
+              $ref: '#/components/examples/ProductMeetingResponseObjectSchema'
+              
+    ProductMeetingObjectArray:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductMeetingResponse'
+          examples:
+            Example:
+              $ref: '#/components/examples/ProductMeetingResponseObjectArraySchema'
+    ProductMeetingDeletedObject:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                $ref: '#/components/schemas/ProductMeetingDeletedResponse'
+          examples:
+            Example:
+              $ref: '#/components/examples/ProductMeetingResponseDeletedObjectSchema'
+              
+    UserObjectArray:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+          examples:
+            Example:
+              $ref: '#/components/examples/UserResponseObjectArraySchema'
+    UserObject:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                $ref: '#/components/schemas/UserResponse'
+          examples:
+            Example:
+              $ref: '#/components/examples/UserResponseObjectSchema'
+    UserDeletedObject:
+      description: Succesful operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              result:
+                $ref: '#/components/schemas/UserResponseDeleted'
+          examples:
+            Example:
+              $ref: '#/components/examples/UserResponseDeletedObjectSchema'
+              
+  examples:
+    AuthResponseAutoLoginUserObjectSchema:
+      summary: URL
+      value:
+        success: true
+        result:
+          url: 'https://login.weseedo.nl/#/conversation/adminK1TRnQ2hAErCEpfbXwtYBCtVhLepFoHTldaFN7ewTrYgpO9t3A5VZpzMxGnvrhJoRMoUG6HzYM25X2zo7MveGNO0ndlTwUzrt5zIHRwKWZSkSWsR48mQoNGbBoNmrxoRxFOYLzWiaJATWH3y5sTOV0yeI2gT7OdjoKTXk1S0iKcsqilyqy3APPDimgYAaK9G8zvFIyAlPQUm9IbhjbyUrWCf1F1tEjgZoR1pownJqRirEc2C96h7t5NAlF'
+    MeetingRequestBodyObjectSchema:
+      summary: Meeting
+      value:
+        site: 35h64d8a0e14e4c24ac20f42
+        agent: 5aedbd02e138231a7c1d7719
+        is_appointment: true
+        time_start: '2020-03-18T14:15:00.000Z'
+        time_end: '2020-03-18T15:15:00.000Z'
+        participants:
+          - name: Participant 1
+            email: visitor1@participant.nl
+            phone: '+31612312312'
+          - name: Participant 2
+            email: visitor2@participant.nl
+            phone: '+31612312312'
+        subject: Meeting
+        invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+        invitation_sms: Click on the link to join.
+        send_email: true
+        send_sms: true
+    MeetingRequestBodyObjectSchemaPut:
+      summary: Meeting
+      value:
+        time_start: '2020-03-18T14:15:00.000Z'
+        time_end: '2020-03-18T15:15:00.000Z'
+    MeetingRequestBodyObjectSchemaPatch:
+      summary: File
+      value:
+        time_start: '2020-03-18T14:15:00.000Z'
+        time_end: '2020-03-18T15:15:00.000Z'
+    MeetingChatFileRequestBodyObjectSchema:
+      summary: File
+      value:
+        file: file
+        attach: true
+        present: false
+    MeetingResponseObjectSchema:
+      summary: Meeting
+      value:
+        success: true
+        result:
+          id: 6bbf64a9e13844d1d140d6e2
+          company:
+            id: 58h6aa8a0e14a4c24df20760
+            name: Company 1
+            contact:
+              id: 784d061c0856dc4c97774da7
+              first_name: Firstname
+              last_name: Lastname
+              email: contact1@weseedo.nl
+              phone: '+31612345678'
+              language: nl
+          room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURd
+          room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h2
+          duration: 0
+          is_appointment: true
+          room_created: '2020-03-18T14:15:00.000Z'
+          room_available_from: '2020-03-18T14:15:00.000Z'
+          room_available_till: '2020-03-18T15:15:00.000Z'
+          created_by:
+            id: 58f6ee406a2308a38ca39dec
+            name: Firstname Lastname
+          site:
+            id: 47c6eedd1a14d3b20dd20771
+            name: Account 1
+          subject: Meeting
+          invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+          participants:
+            - username: agent.89f6aa406a2307a38da39a4r
+              name: Agent
+              id: 5aedbd02e138231a7c1d7719
+              user: 58f6ee406a2308a38ca39dec
+              email: agent1@weseedo.nl
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+              url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+            - username: visitor.Cxo9uuYVYFAJDW47
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor1@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+            - username: visitor.Cxo9uuYVYFAJDW48
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor2@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+    MeetingResponseObjectArraySchema:
+      summary: List of meetings
+      value:
+        success: true
+        result:
+          - id: 6bbf64a9e13844d1d140d6e2
+            company:
+              id: 58h6aa8a0e14a4c24df20760
+              name: Company 1
+              contact:
+                id: 784d061c0856dc4c97774da7
+                first_name: Firstname
+                last_name: Lastname
+                email: contact1@weseedo.nl
+                phone: '+31612345678'
+                language: nl
+            room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURc
+            room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h1
+            duration: 0
+            is_appointment: true
+            room_created: '2020-03-18T14:15:00.000Z'
+            room_available_from: '2020-03-18T14:15:00.000Z'
+            room_available_till: '2020-03-18T15:15:00.000Z'
+            created_by:
+              id: 58f6ee406a2308a38ca39dec
+              name: Firstname Lastname
+            site:
+              id: 47c6eedd1a14d3b20dd20771
+              name: Account 1
+            subject: Meeting
+            invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+            participants:
+              - username: agent.89f6aa406a2307a38da39a4r
+                name: Agent
+                id: 5aedbd02e138231a7c1d7719
+                user: 58f6ee406a2308a38ca39dec
+                email: agent1@weseedo.nl
+                initial_participant: true
+                sessions:
+                  - sessions
+                hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+                url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+              - username: visitor.Cxo9uuYVYFAJDW47
+                name: Participant 1
+                id: 5aedbd02e138231a7c1d7820
+                email: visitor1@participant.nl
+                phone: '+31612312312'
+                initial_participant: true
+                sessions:
+                  - sessions
+                hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+                url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+              - username: visitor.Cxo9uuYVYFAJDW48
+                name: Participant 1
+                id: 5aedbd02e138231a7c1d7820
+                email: visitor2@participant.nl
+                phone: '+31612312312'
+                initial_participant: true
+                sessions:
+                  - sessions
+                hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+                url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+          - id: 6bbf64a9e13844d1d140d6e3
+            company:
+              id: 58h6aa8a0e14a4c24df20760
+              name: Company 1
+              contact:
+                id: 784d061c0856dc4c97774da7
+                first_name: Firstname
+                last_name: Lastname
+                email: contact1@weseedo.nl
+                phone: '+31612345678'
+                language: nl
+            room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURc
+            room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h1
+            duration: 0
+            is_appointment: true
+            room_created: '2020-03-18T14:15:00.000Z'
+            room_available_from: '2020-03-18T14:15:00.000Z'
+            room_available_till: '2020-03-18T15:15:00.000Z'
+            created_by:
+              id: 54c6ae2c7a4504a38ca39dea
+              name: Firstname Lastname
+            site:
+              id: 47c6eedd1a14d3b20dd20771
+              name: Account 1
+            subject: Meeting
+            invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+            participants:
+              - username: agent.89f6aa406a2307a38da39a4b
+                name: Agent
+                id: 5aedbd02e138231a7c1d7720
+                user: 54c6ae2c7a4504a38ca39dea
+                email: agent2@weseedo.nl
+                initial_participant: true
+                sessions:
+                  - sessions
+                hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHy
+                url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHy'
+              - username: visitor.Cxo9uuYVYFAJDW49
+                name: Participant 1
+                id: 5aedbd02e138231a7c1d7820
+                email: visitor1@participant.nl
+                phone: '+31612312312'
+                initial_participant: true
+                sessions:
+                  - sessions
+                hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubC
+                url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubC'
+              - username: visitor.Cxo9uuYVYFAJDW50
+                name: Participant 1
+                id: 5aedbd02e138231a7c1d7820
+                email: visitor2@participant.nl
+                phone: '+31612312312'
+                initial_participant: true
+                sessions:
+                  - sessions
+                hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubD
+                url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubD'
+    MeetingResponseDeletedObjectSchema:
+      summary: Meeting ID
+      value:
+        success: true
+        result:
+          id: 6bbf64a9e13844d1d140d6e2
+    MeetingSmsRequestBodyObjectSchema:
+      summary: Sms
+      value:
+        participant: 58c6dd8a0a14d4b20df36e62
+        message: Please click on the link to join.
+    MeetingSmsResponseObjectSchema:
+      summary: Sms
+      value:
+        success: true
+        result:
+          status: OK
+    MeetingChatFileResponseObjectSchema:
+      summary: Status
+      value:
+        success: true
+        result:
+          status: OK
+    MeetingWebhookRequestBodyCreatedObjectSchema:
+      summary: Webhook
+      value:
+        id: 26edf51b5ed353431566fdf1
+        created: '2020-07-15T12:33:14.000Z'
+        attempt: 1
+        type: MEETING_CREATED
+        data:
+          id: 6bbf64a9e13844d1d140d6e2
+          company:
+            id: 58h6aa8a0e14a4c24df20760
+            name: Company 1
+            contact:
+              id: 784d061c0856dc4c97774da7
+              first_name: Firstname
+              last_name: Lastname
+              email: contact1@weseedo.nl
+              phone: '+31612345678'
+              language: nl
+          room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURd
+          room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h2
+          duration: 0
+          is_appointment: true
+          room_created: '2020-03-18T14:15:00.000Z'
+          room_available_from: '2020-03-18T14:15:00.000Z'
+          room_available_till: '2020-03-18T15:15:00.000Z'
+          created_by:
+            id: 58f6ee406a2308a38ca39dec
+            name: Firstname Lastname
+          site:
+            id: 47c6eedd1a14d3b20dd20771
+            name: Account 1
+          subject: Meeting
+          invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+          participants:
+            - username: agent.89f6aa406a2307a38da39a4r
+              name: Agent
+              id: 5aedbd02e138231a7c1d7719
+              user: 58f6ee406a2308a38ca39dec
+              email: agent1@weseedo.nl
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+              url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+            - username: visitor.Cxo9uuYVYFAJDW47
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor1@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+            - username: visitor.Cxo9uuYVYFAJDW48
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor2@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+    MeetingWebhookRequestBodyStartedObjectSchema:
+      summary: Webhook
+      value:
+        id: 26edf51b5ed353431566fdf1
+        created: '2020-07-15T12:33:14.000Z'
+        attempt: 1
+        type: MEETING_STARTED
+        data:
+          id: 6bbf64a9e13844d1d140d6e2
+          company:
+            id: 58h6aa8a0e14a4c24df20760
+            name: Company 1
+            contact:
+              id: 784d061c0856dc4c97774da7
+              first_name: Firstname
+              last_name: Lastname
+              email: contact1@weseedo.nl
+              phone: '+31612345678'
+              language: nl
+          room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURd
+          room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h2
+          duration: 0
+          is_appointment: true
+          room_created: '2020-03-18T14:15:00.000Z'
+          room_available_from: '2020-03-18T14:15:00.000Z'
+          room_available_till: '2020-03-18T15:15:00.000Z'
+          created_by:
+            id: 58f6ee406a2308a38ca39dec
+            name: Firstname Lastname
+          site:
+            id: 47c6eedd1a14d3b20dd20771
+            name: Account 1
+          subject: Meeting
+          invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+          participants:
+            - username: agent.89f6aa406a2307a38da39a4r
+              name: Agent
+              id: 5aedbd02e138231a7c1d7719
+              user: 58f6ee406a2308a38ca39dec
+              email: agent1@weseedo.nl
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+              url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+            - username: visitor.Cxo9uuYVYFAJDW47
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor1@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+            - username: visitor.Cxo9uuYVYFAJDW48
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor2@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+    MeetingWebhookRequestBodyEndedObjectSchema:
+      summary: Webhook
+      value:
+        id: 26edf51b5ed353431566fdf1
+        created: '2020-07-15T12:33:14.000Z'
+        attempt: 1
+        type: MEETING_ENDED
+        data:
+          id: 6bbf64a9e13844d1d140d6e2
+          company:
+            id: 58h6aa8a0e14a4c24df20760
+            name: Company 1
+            contact:
+              id: 784d061c0856dc4c97774da7
+              first_name: Firstname
+              last_name: Lastname
+              email: contact1@weseedo.nl
+              phone: '+31612345678'
+              language: nl
+          room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURd
+          room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h2
+          duration: 0
+          is_appointment: true
+          room_created: '2020-03-18T14:15:00.000Z'
+          room_available_from: '2020-03-18T14:15:00.000Z'
+          room_available_till: '2020-03-18T15:15:00.000Z'
+          created_by:
+            id: 58f6ee406a2308a38ca39dec
+            name: Firstname Lastname
+          site:
+            id: 47c6eedd1a14d3b20dd20771
+            name: Account 1
+          subject: Meeting
+          invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+          participants:
+            - username: agent.89f6aa406a2307a38da39a4r
+              name: Agent
+              id: 5aedbd02e138231a7c1d7719
+              user: 58f6ee406a2308a38ca39dec
+              email: agent1@weseedo.nl
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+              url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+            - username: visitor.Cxo9uuYVYFAJDW47
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor1@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+            - username: visitor.Cxo9uuYVYFAJDW48
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor2@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+    MeetingWebhookRequestBodyChangedObjectSchema:
+      summary: Webhook
+      value:
+        id: 26edf51b5ed353431566fdf2
+        created: '2020-07-15T12:33:14.000Z'
+        attempt: 1
+        type: MEETING_CHANGED
+        data:
+          id: 6bbf64a9e13844d1d140d6e2
+          company:
+            id: 58h6aa8a0e14a4c24df20760
+            name: Company 1
+            contact:
+              id: 784d061c0856dc4c97774da7
+              first_name: Firstname
+              last_name: Lastname
+              email: contact1@weseedo.nl
+              phone: '+31612345678'
+              language: nl
+          room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURd
+          room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h2
+          duration: 0
+          is_appointment: true
+          room_created: '2020-03-18T14:15:00.000Z'
+          room_available_from: '2020-03-18T14:15:00.000Z'
+          room_available_till: '2020-03-18T15:15:00.000Z'
+          created_by:
+            id: 58f6ee406a2308a38ca39dec
+            name: Firstname Lastname
+          site:
+            id: 47c6eedd1a14d3b20dd20771
+            name: Account 1
+          subject: Meeting
+          invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+          participants:
+            - username: agent.89f6aa406a2307a38da39a4r
+              name: Agent
+              id: 5aedbd02e138231a7c1d7719
+              user: 58f6ee406a2308a38ca39dec
+              email: agent1@weseedo.nl
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+              url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+            - username: visitor.Cxo9uuYVYFAJDW47
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor1@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+            - username: visitor.Cxo9uuYVYFAJDW48
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor2@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+    MeetingWebhookRequestBodyTakeoverObjectSchema:
+      summary: Webhook
+      value:
+        id: 26edf51b5ed353431566fdf1
+        created: '2020-07-15T12:33:14.000Z'
+        attempt: 1
+        type: MEETING_TAKEOVER
+        data:
+          id: 6bbf64a9e13844d1d140d6e2
+          company:
+            id: 58h6aa8a0e14a4c24df20760
+            name: Company 1
+            contact:
+              id: 784d061c0856dc4c97774da7
+              first_name: Firstname
+              last_name: Lastname
+              email: contact1@weseedo.nl
+              phone: '+31612345678'
+              language: nl
+          room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURd
+          room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h2
+          duration: 0
+          is_appointment: true
+          room_created: '2020-03-18T14:15:00.000Z'
+          room_available_from: '2020-03-18T14:15:00.000Z'
+          room_available_till: '2020-03-18T15:15:00.000Z'
+          created_by:
+            id: 58f6ee406a2308a38ca39dec
+            name: Firstname Lastname
+          site:
+            id: 47c6eedd1a14d3b20dd20771
+            name: Account 1
+          subject: Meeting
+          invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+          participants:
+            - username: agent.89f6aa406a2307a38da39a4r
+              name: Agent
+              id: 5aedbd02e138231a7c1d7719
+              user: 58f6ee406a2308a38ca39dec
+              email: agent1@weseedo.nl
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+              url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+            - username: visitor.Cxo9uuYVYFAJDW47
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor1@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+            - username: visitor.Cxo9uuYVYFAJDW48
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor2@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+    MeetingWebhookRequestBodyWaitObjectSchema:
+      summary: Webhook
+      value:
+        id: 26edf51b5ed353431566fdf1
+        created: '2020-07-15T12:33:14.000Z'
+        attempt: 1
+        type: MEETING_WAIT
+        data:
+          id: 6bbf64a9e13844d1d140d6e2
+          company:
+            id: 58h6aa8a0e14a4c24df20760
+            name: Company 1
+            contact:
+              id: 784d061c0856dc4c97774da7
+              first_name: Firstname
+              last_name: Lastname
+              email: contact1@weseedo.nl
+              phone: '+31612345678'
+              language: nl
+          room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURd
+          room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h2
+          duration: 0
+          is_appointment: true
+          room_created: '2020-03-18T14:15:00.000Z'
+          room_available_from: '2020-03-18T14:15:00.000Z'
+          room_available_till: '2020-03-18T15:15:00.000Z'
+          created_by:
+            id: 58f6ee406a2308a38ca39dec
+            name: Firstname Lastname
+          site:
+            id: 47c6eedd1a14d3b20dd20771
+            name: Account 1
+          subject: Meeting
+          invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+          participants:
+            - username: agent.89f6aa406a2307a38da39a4r
+              name: Agent
+              id: 5aedbd02e138231a7c1d7719
+              user: 58f6ee406a2308a38ca39dec
+              email: agent1@weseedo.nl
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+              url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+            - username: visitor.Cxo9uuYVYFAJDW47
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor1@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+            - username: visitor.Cxo9uuYVYFAJDW48
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor2@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+    MeetingWebhookRequestBodyDeclinedObjectSchema:
+      summary: Webhook
+      value:
+        id: 26edf51b5ed353431566fdf1
+        created: '2020-07-15T12:33:14.000Z'
+        attempt: 1
+        type: MEETING_DECLINED
+        data:
+          id: 6bbf64a9e13844d1d140d6e2
+          company:
+            id: 58h6aa8a0e14a4c24df20760
+            name: Company 1
+            contact:
+              id: 784d061c0856dc4c97774da7
+              first_name: Firstname
+              last_name: Lastname
+              email: contact1@weseedo.nl
+              phone: '+31612345678'
+              language: nl
+          room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURd
+          room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h2
+          duration: 0
+          is_appointment: true
+          room_created: '2020-03-18T14:15:00.000Z'
+          room_available_from: '2020-03-18T14:15:00.000Z'
+          room_available_till: '2020-03-18T15:15:00.000Z'
+          created_by:
+            id: 58f6ee406a2308a38ca39dec
+            name: Firstname Lastname
+          site:
+            id: 47c6eedd1a14d3b20dd20771
+            name: Account 1
+          subject: Meeting
+          invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+          participants:
+            - username: agent.89f6aa406a2307a38da39a4r
+              name: Agent
+              id: 5aedbd02e138231a7c1d7719
+              user: 58f6ee406a2308a38ca39dec
+              email: agent1@weseedo.nl
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+              url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+            - username: visitor.Cxo9uuYVYFAJDW47
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor1@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+            - username: visitor.Cxo9uuYVYFAJDW48
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor2@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+    MeetingWebhookRequestBodyForwardedObjectSchema:
+      summary: Webhook
+      value:
+        id: 26edf51b5ed353431566fdf1
+        created: '2020-07-15T12:33:14.000Z'
+        attempt: 1
+        type: MEETING_FORWARDED
+        data:
+          id: 6bbf64a9e13844d1d140d6e2
+          company:
+            id: 58h6aa8a0e14a4c24df20760
+            name: Company 1
+            contact:
+              id: 784d061c0856dc4c97774da7
+              first_name: Firstname
+              last_name: Lastname
+              email: contact1@weseedo.nl
+              phone: '+31612345678'
+              language: nl
+          room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURd
+          room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h2
+          duration: 0
+          is_appointment: true
+          room_created: '2020-03-18T14:15:00.000Z'
+          room_available_from: '2020-03-18T14:15:00.000Z'
+          room_available_till: '2020-03-18T15:15:00.000Z'
+          created_by:
+            id: 58f6ee406a2308a38ca39dec
+            name: Firstname Lastname
+          site:
+            id: 47c6eedd1a14d3b20dd20771
+            name: Account 1
+          subject: Meeting
+          invitation: Hereby I send you the confirmation for our online video call. On the specified date and time you can click the link in this email. The video call will appear on your screen and we can start the conversation. See you soon!
+          participants:
+            - username: agent.89f6aa406a2307a38da39a4r
+              name: Agent
+              id: 5aedbd02e138231a7c1d7719
+              user: 58f6ee406a2308a38ca39dec
+              email: agent1@weseedo.nl
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+              url: 'https://login.weseedo.nl/#/conversation/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+            - username: visitor.Cxo9uuYVYFAJDW47
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor1@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+            - username: visitor.Cxo9uuYVYFAJDW48
+              name: Participant 1
+              id: 5aedbd02e138231a7c1d7820
+              email: visitor2@participant.nl
+              phone: '+31612312312'
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+              url: 'https://login.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+    MeetingWebhookRequestBodyDeletedObjectSchema:
+      summary: Webhook
+      value:
+        id: 26edf51b5ed353431566fdf3
+        created: '2020-07-15T12:33:14.000Z'
+        attempt: 1
+        type: MEETING_DELETED
+        data:
+          id: 6bbf64a9e13844d1d140d6e2
+    ProductMeetingResponseObjectArraySchema:
+      summary: List of meetings
+      value:
+        success: true
+        result:
+          - id: 6bbf64a9e13844d1d140d6e2
+            company:
+              id: 58h6aa8a0e14a4c24df20760
+              name: Company 1
+              contact:
+                id: 784d061c0856dc4c97774da7
+                first_name: Firstname
+                last_name: Lastname
+                email: contact1@weseedo.nl
+                phone: '+31612345678'
+                language: nl
+            room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURc
+            room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h1
+            stream_camera_two_way: true
+            duration: 0
+            room_created: '2020-03-27T18:43:07.000Z'
+            room_available_from: '2020-03-27T18:43:07.000Z'
+            room_available_till: '2020-04-03T18:43:07.000Z'
+            created_by:
+              id: 58f6ee406a2308a38ca39dec
+              name: Firstname Lastname
+            participants:
+              - username: agent.89f6aa406a2307a38da39a4r
+                name: Agent 1
+                id: 5aedbd02e138231a7c1d7719
+                user: 58f6ee406a2308a38ca39dec
+                email: agent1@weseedo.nl
+                initial_participant: true
+                sessions:
+                  - sessions
+                hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+                url: 'https://login-direct.weseedo.nl/meeting/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+              - username: visitor.Cxo9uuYVYFAJDW47
+                phone: '+3112312312'
+                id: 5aedbd02e138231a7c1d7820
+                initial_participant: true
+                sessions:
+                  - sessions
+                hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+                url: 'https://login-direct.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+          - id: 6bbf64a9e13844d1d140d6e3
+            company:
+              id: 58h6aa8a0e14a4c24df20760
+              name: Company 1
+              contact:
+                id: 784d061c0856dc4c97774da7
+                first_name: Firstname
+                last_name: Lastname
+                email: contact1@weseedo.nl
+                phone: '+31612345678'
+                language: nl
+            room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURc
+            room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h1
+            stream_camera_two_way: true
+            duration: 0
+            room_created: '2020-03-27T18:43:07.000Z'
+            room_available_from: '2020-03-27T18:43:07.000Z'
+            room_available_till: '2020-04-03T18:43:07.000Z'
+            created_by:
+              id: 54c6ae2c7a4504a38ca39dea
+              name: Firstname Lastname
+            participants:
+              - username: agent.89f6aa406a2307a38da39a4b
+                name: Agent 1
+                id: 5aedbd02e138231a7c1d7720
+                user: 54c6ae2c7a4504a38ca39dea
+                email: agent2@weseedo.nl
+                initial_participant: true
+                sessions:
+                  - sessions
+                hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHy
+                url: 'https://login-direct.weseedo.nl/meeting/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHy'
+              - username: visitor.Cxo9uuYVYFAJDW48
+                phone: '+3112312312'
+                id: 5aedbd02e138231a7c1d7820
+                initial_participant: true
+                sessions:
+                  - sessions
+                hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB
+                url: 'https://login-direct.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubB'
+    ProductMeetingResponseObjectSchema:
+      summary: Meeting
+      value:
+        success: true
+        result:
+          id: 6bbf64a9e13844d1d140d6e2
+          company:
+            id: 58h6aa8a0e14a4c24df20760
+            name: Company 1
+            contact:
+              id: 784d061c0856dc4c97774da7
+              first_name: Firstname
+              last_name: Lastname
+              email: contact1@weseedo.nl
+              phone: '+31612345678'
+              language: nl
+          room_id: 9Pusrq3Do43DAEQnOG9aCtLFfl2FoURd
+          room_password: O0p48P2TuMavG0EAtMSdpy4PbkO2h2
+          stream_camera_two_way: true
+          duration: 0
+          room_created: '2020-03-27T18:43:07.000Z'
+          room_available_from: '2020-03-27T18:43:07.000Z'
+          room_available_till: '2020-04-03T18:43:07.000Z'
+          created_by:
+            id: 58f6ee406a2308a38ca39dec
+            name: Firstname Lastname
+          participants:
+            - username: agent.89f6aa406a2307a38da39a4r
+              name: Agent 1
+              id: 5aedbd02e138231a7c1d7719
+              user: 58f6ee406a2308a38ca39dec
+              email: agent1@weseedo.nl
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx
+              url: 'https://login-direct.weseedo.nl/meeting/qj7OqoxSt2zK6S16my8VZ28N1IigzvNl_jMz42wlA8Dj59DKV0G8zAc6PJ8LvWiHx'
+            - username: visitor.Cxo9uuYVYFAJDW47
+              phone: '+3112312312'
+              id: 5aedbd02e138231a7c1d7820
+              initial_participant: true
+              sessions:
+                - sessions
+              hash: wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA
+              url: 'https://login-direct.weseedo.nl/meeting/wCPjvYM7yf7KBwGVU0OsFG6DVBAGqZ5s_6PFMcsoR0GBeKIF8AhkngSqUy9UXBubA'
+    ProductMeetingResponseDeletedObjectSchema:
+      summary: Meeting ID
+      value:
+        success: true
+        result:
+          id: 6bbf64a9e13844d1d140d6e2
+          
+    UserRequestBodyObjectSchema:
+      summary: User
+      value:
+        first_name: Firstname
+        last_name: Lastname
+        email: agent1@weseedo.nl
+        photo: iVBORw0KGgoAAAANSUhEUgAAARgAAAAqCAIAA.....
+        password: StrongPassword123!
+        locale: nl
+        suspended: false
+    UserResponseObjectSchema:
+      summary: User
+      value:
+        success: true
+        result:
+          id: 58f6ee406a2308a38ca39dec
+          first_name: Firstname
+          last_name: Lastname
+          name: Firstname Lastname
+          email: agent1@weseedo.nl
+          photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAAqCAIAA.....'
+          locale: nl
+          role: agent
+          created_at: '2020-01-29T15:26:20.000Z'
+          sites:
+            - id: 47c6eedd1a14d3b20dd20771
+              name: Account 1
+            - id: 47c6eedd1a14d3b20dd20772
+              name: Account 2
+          entity:
+            type: company
+            id: 58h6aa8a0e14a4c24df20760
+            name: WeSeeDo B.V.
+            package:
+              id: 674a5rb3ca9d4f7e4f1da67a
+              name: professional
+              features:
+                - agent_create_appointment
+                - send_file
+                - screenshot
+                - chat
+          status: online
+          suspended: false
+    UserResponseObjectArraySchema:
+      summary: List of users
+      value:
+        success: true
+        result:
+          - id: 58f6ee406a2308a38ca39dec
+            first_name: Firstname
+            last_name: Lastname
+            name: Firstname Lastname
+            email: agent1@weseedo.nl
+            photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAAqCAIAA.....'
+            locale: nl
+            role: agent
+            created_at: '2020-01-28T14:26:06.000Z'
+            sites:
+              - id: 47c6eedd1a14d3b20dd20771
+                name: Account 1
+              - id: 47c6eedd1a14d3b20dd20772
+                name: Account 2
+            entity:
+              type: company
+              id: 58h6aa8a0e14a4c24df20760
+              name: WeSeeDo B.V.
+              package:
+                id: 674a5rb3ca9d4f7e4f1da67a
+                name: professional
+                features:
+                  - agent_create_appointment
+                  - send_file
+                  - screenshot
+                  - chat
+            status: online
+            suspended: false
+          - id: 54c6ae2c7a4504a38ca39dea
+            first_name: Firstname
+            last_name: Lastname
+            name: Firstname Lastname
+            email: agent2@weseedo.nl
+            photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAAqCAIAA.....'
+            locale: nl
+            role: agent
+            created_at: '2020-01-29T15:26:20.000Z'
+            sites:
+              - id: 47c6eedd1a14d3b20dd20771
+                name: Account 1
+              - id: 47c6eedd1a14d3b20dd20772
+                name: Account 2
+            entity:
+              type: company
+              id: 58h6aa8a0e14a4c24df20760
+              name: WeSeeDo B.V.
+              package:
+                id: 674a5rb3ca9d4f7e4f1da67a
+                name: professional
+                features:
+                  - agent_create_appointment
+                  - send_file
+                  - screenshot
+                  - chat
+            status: online
+            suspended: false
+    UserResponseDeletedObjectSchema:
+      summary: User ID
+      value:
+        success: true
+        result:
+          id: 58f6ee406a2308a38ca39dec
+    UserWebhookRequestBodyCreatedObjectSchema:
+      summary: Webhook
+      value:
+        id: 26edf51b5ed353431566fdf1
+        created: '2020-07-15T12:33:14.000Z'
+        attempt: 1
+        type: USER_CREATED
+        data:
+          id: 58f6ee406a2308a38ca39dec
+          first_name: Firstname
+          last_name: Lastname
+          name: Firstname Lastname
+          email: agent1@weseedo.nl
+          photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAAqCAIAA.....'
+          locale: nl
+          role: agent
+          created_at: '2020-01-29T15:26:20.000Z'
+          sites:
+            - id: 47c6eedd1a14d3b20dd20771
+              name: Account 1
+            - id: 47c6eedd1a14d3b20dd20772
+              name: Account 2
+          entity:
+            type: company
+            id: 58h6aa8a0e14a4c24df20760
+            name: WeSeeDo B.V.
+            package:
+              id: 674a5rb3ca9d4f7e4f1da67a
+              name: professional
+              features:
+                - agent_create_appointment
+                - send_file
+                - screenshot
+                - chat
+          status: online
+          suspended: false
+  parameters:
+    MeetingIDParameter:
+      name: id
+      description: A valid meeting ID
+      in: path
+      required: true
+      schema:
+        type: string
+        example: 6bbf64a9e13844d1d140d6e2
+    MeetingQueryCompanyParameter:
+      name: company
+      description: Only select meetings with given company ID
+      in: query
+      schema:
+        type: string
+        example: 784d061c0856dc4c97774da7
+    MeetingQueryUserParameter:
+      name: user
+      description: Only select meetings with given user ID
+      in: query
+      schema:
+        type: string
+        example: 58f6ee406a2308a38ca39dec
+    MeetingQueryRoomAvailableTillParameter:
+      name: room_available_till
+      description: 'Add ''null'' to get all meetings, or use a date (e.g. YYYY-MM-DD HH:mm, or ISO date) to get all meetings which will end before the specified date'
+      in: query
+      schema:
+        type: string
+        format: date-time
+        example: '2020-03-18T14:15:00.000Z'
+    ProductMeetingIDParameter:
+      name: id
+      description: A valid meeting ID
+      in: path
+      required: true
+      schema:
+        type: string
+        example: 6bbf64a9e13844d1d140d6e2
+    ProductQueryUserParameter:
+      name: user
+      description: Only select meetings with given user ID
+      in: query
+      schema:
+        type: string
+        example: 58f6ee406a2308a38ca39dec
+    UserIDParameter:
+      name: id
+      description: A valid user ID
+      in: path
+      required: true
+      schema:
+        type: string
+        example: 84c7ey417a4558a38ca39ded
+    UserQueryUserStatusParameter:
+      name: user_status
+      description: Add user status into response
+      in: query
+      schema:
+        type: boolean
+    UserQueryCompanyParameter:
+      name: company
+      description: Only select users with given company ID
+      in: query
+      schema:
+        type: string
+        example: 784d061c0856dc4c97774da7
+    UserQueryResellerParameter:
+      name: reseller
+      description: Only select users with given reseller ID
+      in: query
+      schema:
+        type: string
+        example: 334d171d1854dd4c97874ba8
+    UserQueryDealerParameter:
+      name: dealer
+      description: Only select users with given dealer ID
+      in: query
+      schema:
+        type: string
+        example: 45h6ac8a1e14a3c24ab20740
+        
+  schemas:
+    AuthResponseAutoLoginUser:
+      type: object
+      properties:
+        url:
+          description: Agent dashboard URL
+          type: string
+    AccountResponseShort:
+      type: object
+      properties:
+        id:
+          description: Site ID
+          type: string
+        name:
+          description: Site name
+          type: string  
+    Users_GetResponse:
+      properties:
+        success:
+          type: boolean
+          example: true
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              email:
+                type: string
+              locale:
+                type: string
+              role:
+                type: string
+              company:
+                $ref: '#/components/schemas/Company'
+      type: object
+      example:
+        - id: 58..eb
+          name: Agent 1
+          email: agent1@weseedo.nl
+          locale: nl
+          role: agent
+          company:
+            id: 58..60
+            name: WeSeeDo B.V.
+        - id: 58..ec
+          name: Assistent 1
+          email: assistent1@weseedo.nl
+          locale: nl
+          role: assistent
+          company:
+            id: 58..60
+            name: WeSeeDo B.V.
+  
+    Users_GetUserByIdResponse:
+      properties:
+        success:
+          type: boolean
+          example: true
+        result:
+          $ref: '#/components/schemas/Users_GetResponse'
+      type: object
+  
+    Company:
+      properties:
+        id:
+          type: string
+          example: 58..82
+        name:
+          type: string
+          example: WeSeeDo B.V.
+      type: object
+  
+    Users_POSTPUTResponse:
+      properties:
+        success:
+          type: boolean
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+      type: object
+    
+    User:
+      properties:
+        id:
+          type: string
+          example: 58..82
+        first_name:
+          type: string
+          example: Testfirstname
+        last_name:
+          type: string
+          example: Testlastname
+        name:
+          type: string
+          example: Testfirstname Testlastname
+        email:
+          type: string
+          example: agent1@weseedo.nl
+        locale:
+          type: string
+          example: nl
+        role:
+          type: string
+          example: agent
+        created_at:
+          type: string
+          example: '2017-11-17T12:07:56.308Z'
+        company:
+          $ref: '#/components/schemas/Company'
+      type: object
+  
+    MeetingRequestBodyPost:
+      required:
+        - site
+        - subject
+        - participants
+      type: object
+      properties:
+        site:
+          type: string
+          description: Site ID
+        agent:
+          type: string
+          description: User ID. Not required for agents. It will create a meeting on behalf of the specified agent.
+        is_appointment:
+          type: boolean
+          description: Define if meeting start directly or on specific start time. Set on true for specific time and false to start the meeting directly. Default true.
+        time_start:
+          type: string
+          format: date-time
+          description: 'Date and time when meeting start (YYYY-MM-DD HH:mm:ss or ISO date). Only required when is_appointment is set on true.'
+        time_end:
+          type: string
+          format: date-time
+          description: 'Date and time when meeting is not valid anymore (YYYY-MM-DD HH:mm:ss or ISO date). Leave empty to set it one hour later as start_time.'
+        participants:
+          type: array
+          items:
+            required:
+              - name
+            type: object
+            properties:
+              name:
+                type: string
+                description: Participant name
+              email:
+                type: string
+                description: Participant email for invite. Make sure that send_email is true. Leave empty to not send for specific participant
+              phone:
+                type: string
+                description: Participant phone for invite. Make sure that send_sms is true. Leave empty to not send for specific participant
+        subject:
+          type: string
+          description: Meeting subject
+        invitation:
+          type: string
+          description: Invite message. Leave empty to get invite message from specified site.
+        invitation_sms:
+          type: string
+          description: Invite message SMS. Leave empty to get invite message from specified site.
+        send_email:
+          type: boolean
+          description: Send invite mail to participants. Default false
+        send_sms:
+          type: boolean
+          description: Send invite SMS to participants. Default false
+    MeetingRequestBodyPatch:
+      type: object
+      properties:
+        time_start:
+          type: string
+          format: date-time
+          description: 'Date and time when meeting start (YYYY-MM-DD HH:mm:ss or ISO date).'
+        time_end:
+          type: string
+          format: date-time
+          description: 'Date and time when meeting is not valid anymore (YYYY-MM-DD HH:mm:ss or ISO date). Leave empty to set it one hour later as start_time.'
+    MeetingRequestBodyPut:
+      required:
+        - time_start
+        - time_end
+      allOf:
+        - $ref: '#/components/schemas/MeetingRequestBodyPatch'
+    MeetingChatFileRequestBody:
+      required:
+        - file
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+          description: File
+        attach:
+          type: boolean
+          description: Add to chat as attachment. Able to download for participants. Default true
+          default: 'true'
+        present:
+          type: boolean
+          description: Open as presentation in chat. Not able to download for participants. Default false
+          default: 'false'
+    MeetingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The generated ID for this meeting
+        company:
+          $ref: '#/components/schemas/CompanyResponseShort'
+        room_id:
+          type: string
+          description: 'The room id that is being used for this meeting, you generally do not need to use this information.'
+        room_password:
+          type: string
+          description: 'The room password that is being used for this meeting, you generally do not need to use this information.'
+        duration:
+          type: integer
+          description: Duration of the meeting in seconds
+        is_appointment:
+          type: boolean
+          description: Define if meeting start directly or on specific start time. Value is true for specific time and false to start the meeting directly.
+        room_created:
+          type: string
+          format: date-time
+          description: ISO date that described when the room is created.
+        room_available_from:
+          type: string
+          format: date-time
+          description: ISO date that described from when the room will be available.
+        room_available_till:
+          type: string
+          format: date-time
+          description: 'ISO date that described until when the room will be available. If the conversation is still active at this time, it will NOT be automatically terminated!'
+        created_by:
+          type: object
+          properties:
+            id:
+              type: string
+              description: User ID
+            name:
+              type: string
+              description: User name
+        site:
+          $ref: '#/components/schemas/AccountResponseShort'
+        subject:
+          type: string
+          description: Meeting subject
+        invitation:
+          type: string
+          description: Invite message
+        participants:
+          type: array
+          items:
+            type: object
+            properties:
+              username:
+                type: string
+                description: 'Automatically generated username for a participant, for an agent this username has a fixed value that is generated upon agent creation'
+              name:
+                type: string
+                description: 'Contains the name of the agent when the participant is an agent, or the phone number of the participant when it is a participant'
+              id:
+                type: string
+                description: The generated ID of an agent or participant
+              user:
+                type: string
+                description: Only returned for agents
+              email:
+                type: string
+                description: Only returned for agents
+              phone:
+                type: string
+                description: Only returned for agents
+              hash:
+                type: string
+                description: 'This value should be sent along in the secure link, it authenticates the agent and participant'
+              url:
+                type: string
+                description: Contains the secure link to start the meeting for agent and visitors
+    MeetingDeletedResponse:
+      type: object
+      properties:
+        id:
+          description: Meeting ID
+          type: string
+    MeetingSmsRequestBody:
+      type: object
+      required:
+        - participant
+        - message
+      properties:
+        participant:
+          description: Participant ID
+          type: string
+        message:
+          description: SMS message (max length = 40)
+          type: string
+    MeetingSmsResponse:
+      type: object
+      properties:
+        status:
+          description: OK
+          type: string
+    MeetingChatFileResponse:
+      type: object
+      properties:
+        status:
+          description: OK
+          type: string
+    MeetingWebhookRequestBodyCreated:
+      allOf:
+        - $ref: '#/components/schemas/MeetingWebhookRequestBody'
+        - type: object
+          properties:
+            type:
+              description: Webhook type MEETING_CREATED
+              type: string
+            data:
+              $ref: '#/components/schemas/MeetingResponse'
+    MeetingWebhookRequestBodyStarted:
+      allOf:
+        - $ref: '#/components/schemas/MeetingWebhookRequestBody'
+        - type: object
+          properties:
+            type:
+              description: Webhook type MEETING_STARTED
+              type: string
+            data:
+              $ref: '#/components/schemas/MeetingResponse'
+    MeetingWebhookRequestBodyEnded:
+      allOf:
+        - $ref: '#/components/schemas/MeetingWebhookRequestBody'
+        - type: object
+          properties:
+            type:
+              description: Webhook type MEETING_ENDED
+              type: string
+            data:
+              $ref: '#/components/schemas/MeetingResponse'
+    MeetingWebhookRequestBodyChanged:
+      allOf:
+        - $ref: '#/components/schemas/MeetingWebhookRequestBody'
+        - type: object
+          properties:
+            type:
+              description: Webhook type MEETING_CHANGED
+              type: string
+            data:
+              $ref: '#/components/schemas/MeetingResponse'
+    MeetingWebhookRequestBodyTakeover:
+      allOf:
+        - $ref: '#/components/schemas/MeetingWebhookRequestBody'
+        - type: object
+          properties:
+            type:
+              description: Webhook type MEETING_TAKEOVER
+              type: string
+            data:
+              $ref: '#/components/schemas/MeetingResponse'
+    MeetingWebhookRequestBodyWait:
+      allOf:
+        - $ref: '#/components/schemas/MeetingWebhookRequestBody'
+        - type: object
+          properties:
+            type:
+              description: Webhook type MEETING_WAIT
+              type: string
+            data:
+              $ref: '#/components/schemas/MeetingResponse'
+    MeetingWebhookRequestBodyDeclined:
+      allOf:
+        - $ref: '#/components/schemas/MeetingWebhookRequestBody'
+        - type: object
+          properties:
+            type:
+              description: Webhook type MEETING_DECLINED
+              type: string
+            data:
+              $ref: '#/components/schemas/MeetingResponse'
+    MeetingWebhookRequestBodyForwarded:
+      allOf:
+        - $ref: '#/components/schemas/MeetingWebhookRequestBody'
+        - type: object
+          properties:
+            type:
+              description: Webhook type MEETING_FORWARDED
+              type: string
+            data:
+              $ref: '#/components/schemas/MeetingResponse'
+    MeetingWebhookRequestBodyDeleted:
+      allOf:
+        - $ref: '#/components/schemas/MeetingWebhookRequestBody'
+        - type: object
+          properties:
+            type:
+              description: Webhook type MEETING_DELETED
+              type: string
+            data:
+              $ref: '#/components/schemas/MeetingDeletedResponse'
+    MeetingWebhookRequestBody:
+      type: object
+      properties:
+        id:
+          description: Webhook ID
+          type: string
+        created:
+          description: Webhook created ISO date
+          type: string
+          format: date-time
+        attempt:
+          description: Amount of attempts
+          type: number
+    UserRequestBodyPost:
+      required:
+        - first_name
+        - last_name
+        - name
+        - email
+        - locale
+        - role
+      allOf:
+        - $ref: '#/components/schemas/UserRequestBody'
+        - type: object
+          properties:
+            role:
+              oneOf:
+                - type: string
+                  description: Role "dealer"
+                - type: string
+                  description: Role "reseller"
+                - type: string
+                  description: Role "admin"
+                - type: string
+                  description: Role "agent"
+                - type: string
+                  description: Role "assistent"
+                - type: string
+                  description: Role "assistent_video"
+            entity:
+              oneOf:
+                - type: object
+                  required:
+                    - type
+                    - id
+                  properties:
+                    type:
+                      description: Entity type dealer
+                      type: string
+                    id:
+                      description: Dealer ID
+                      type: string
+                - type: object
+                  required:
+                    - type
+                    - id
+                  properties:
+                    type:
+                      description: Entity type reseller
+                      type: string
+                    id:
+                      description: Reseller ID
+                      type: string
+                - type: object
+                  required:
+                    - type
+                    - id
+                  properties:
+                    type:
+                      description: Entity type company
+                      type: string
+                    id:
+                      description: Company ID
+                      type: string
+    UserRequestBodyPut:
+      required:
+        - first_name
+        - last_name
+        - name
+        - locale
+      allOf:
+        - $ref: '#/components/schemas/UserRequestBody'
+        - type: object
+          properties:
+            suspended:
+              description: Is suspended
+              type: boolean
+    UserRequestBodyPatch:
+      allOf:
+        - $ref: '#/components/schemas/UserRequestBody'
+        - type: object
+          properties:
+            suspended:
+              description: Is suspended
+              type: boolean
+    UserRequestBody:
+      type: object
+      properties:
+        first_name:
+          description: First name
+          type: string
+        last_name:
+          description: Last name
+          type: string
+        email:
+          description: E-mail address
+          type: string
+        photo:
+          description: 'Base64 image excluded mimetype (e.g. data:image/png;base64,)'
+          type: string
+        password:
+          description: Password
+          type: string
+        locale:
+          oneOf:
+            - type: string
+              description: Locale "nl"
+            - type: string
+              description: Locale "en"
+    UserResponse:
+      type: object
+      properties:
+        id:
+          description: User ID
+          type: string
+        first_name:
+          description: First name
+          type: string
+        last_name:
+          description: Last name
+          type: string
+        name:
+          description: Full name
+          type: string
+        email:
+          description: E-mail address
+          type: string
+        photo:
+          description: Base64 image
+          type: string
+        locale:
+          oneOf:
+            - type: string
+              description: Locale "nl"
+            - type: string
+              description: Locale "en"
+        role:
+          oneOf:
+            - type: string
+              description: Role "dealer"
+            - type: string
+              description: Role "reseller"
+            - type: string
+              description: Role "admin"
+            - type: string
+              description: Role "agent"
+            - type: string
+              description: Role "assistent"
+            - type: string
+              description: Role "assistent_video"
+        created_at:
+          description: Created date and time
+          type: string
+          format: date-time
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountResponseShort'
+        entity:
+          oneOf:
+            - type: object
+              properties:
+                type:
+                  description: Entity type dealer
+                  type: string
+                id:
+                  description: Dealer ID
+                  type: string
+                name:
+                  description: Dealer name
+                  type: string
+            - type: object
+              properties:
+                type:
+                  description: Entity type reseller
+                  type: string
+                id:
+                  description: Reseller ID
+                  type: string
+                name:
+                  description: Reseller name
+                  type: string
+            - type: object
+              properties:
+                type:
+                  description: Entity type company
+                  type: string
+                id:
+                  description: Company ID
+                  type: string
+                name:
+                  description: Company name
+                  type: string
+        status:
+          description: Status online or offline. Only added when status=true in query
+          type: string
+        suspended:
+          description: Is suspended
+          type: boolean
+    UserResponseDeleted:
+      type: object
+      properties:
+        id:
+          description: User ID
+          type: string
+          
+    error:
+      properties:
+        info:
+          description: Additional information about error.
+          title: Info
+          type: string
+        message:
+          description: Error message
+          title: Error message
+          type: string
+        name:
+          description: Error name
+          title: Error name
+          type: string
+        status:
+          description: Status
+          title: Status
+          type: string
+        transactionId:
+          description: The `transaction_id` of the the request.
+          title: Transaction ID
+          type: string
+    ContactResponse:
+      type: object
+      properties:
+        id:
+          description: Contact ID
+          type: string
+        first_name:
+          description: First name
+          type: string
+        last_name:
+          description: Last name
+          type: string
+        email:
+          description: E-mail address
+          type: string
+        phone:
+          description: Phone number
+          type: string
+        language:
+          description: 'Language code (e.g. nl, en, etc.)'
+          type: string
+    CompanyResponseShort:
+      type: object
+      properties:
+        id:
+          description: Company ID
+          type: string
+        name:
+          description: Company name
+          type: string
+        contact:
+          $ref: '#/components/schemas/ContactResponse'
+    ProductMeetingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The generated ID for this meeting
+        company:
+          $ref: '#/components/schemas/CompanyResponseShort'
+        room_id:
+          type: string
+          description: 'The room id that is being used for this meeting, you generally do not need to use this information.'
+        room_password:
+          type: string
+          description: 'The room password that is being used for this meeting, you generally do not need to use this information.'
+        stream_camera_two_way:
+          type: boolean
+          description: Show camera from agent to participant
+        duration:
+          type: integer
+          description: Duration of the meeting in seconds
+        room_created:
+          type: string
+          format: date-time
+          description: ISO date that described when the room is created.
+        room_available_from:
+          type: integer
+          format: date-time
+          description: ISO date that described from when the room will be available.
+        room_available_till:
+          type: integer
+          format: date-time
+          description: 'ISO date that described until when the room will be available. If the conversation is still active at this time, it will NOT be automatically terminated!'
+        created_by:
+          type: object
+          properties:
+            id:
+              type: string
+              description: User ID
+            name:
+              type: string
+              description: User name
+        participants:
+          type: array
+          items:
+            type: object
+            properties:
+              username:
+                type: string
+                description: 'Automatically generated username for a participant, for an agent this username has a fixed value that is generated upon agent creation'
+              name:
+                type: string
+                description: Contains the name of the agent
+              phone:
+                type: string
+                description: Contains the phone of the participant
+              id:
+                type: string
+                description: The generated ID of an agent or participant
+              user:
+                type: string
+                description: Only returned for agents
+              email:
+                type: string
+                description: Only returned for agents
+              hash:
+                type: string
+                description: 'Only returned for participants, not for agents. This value should be sent along in the secure link that will be sent to the participant, it authenticates the participants'
+              url:
+                type: string
+                description: Contains the secure link to start the meeting for agent and visitors
+    ProductMeetingDeletedResponse:
+      type: object
+      properties:
+        id:
+          description: Meeting ID
+          type: string
+
+paths:
+  "/direct/meetings":
+    post:
+      summary: Creates a new meeting.
+      description: Creates a new meeting.
+      tags:
+      - Meetings
+      security:
+        - oauth2: []
+      parameters: 
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked 
+          schema:
+            type: string
+            default: ""
+          required: false           
+      requestBody:
+        description: The meeting to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                agent:
+                  type: string
+                  description: User ID. Not required for agents. It will create a meeting on behalf of the specified agent.
+                  example: "58f6ee406a2308a38ca39dec"
+                phone:
+                  type: string
+                  description: Phone number of the participant, either in the form of +31612312312, 0612312312, 12312312 (is converted to +31612312312), or any other valid international phone number.
+                  example: "+31612312312"
+                stream_camera_two_way:
+                  type: boolean
+                  description: Show camera from agent to participant
+                  example: true
+                invitation_sms:
+                  type: string
+                  description: Invite message SMS. Leave empty to get invite message from specified site.
+                  example: "Click on the link to join."
+                send_sms:
+                  type: string
+                  description: Send invite SMS to participant. Default false
+                  example: true
+      responses:
+        200:
+          $ref: '#/components/responses/ProductMeetingObject'
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
+    get:
+      summary: Retrieves a list of meetings
+      description: Retrieves a list of meetings. Meetings from the past are not shown by default. Use 'room_available_till' in query to retrieve all meetings or meetings before the specified date.
+      tags:
+      - Meetings
+      security:
+        - oauth2: []
+      parameters: 
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked
+          schema:
+            type: string
+            default: ""
+          required: false
+        - in: query
+          name: user
+          description: Only select meetings with given user ID
+          example: "58f6ee406a2308a38ca39dec"
+          schema:
+            type: string
+          required: false  
+        - in: query
+          name: room_available_till
+          description: Add 'null' to get all meetings, or use a date (e.g. YYYY-MM-DD HH:mm, or ISO date) to get all meetings which will end before the specified date
+          example: "2020-03-18T14:15:00.000Z"
+          schema:
+            type: string
+          required: false          
+      responses:
+        200:
+          $ref: '#/components/responses/ProductMeetingObjectArray'
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
+  "/direct/meetings/{id}":
+    get:
+      summary: Retrieves a meeting.
+      description: Retrieves information about a meeting.
+      tags:
+      - Meetings
+      security:
+        - oauth2: []
+      parameters: 
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked
+          schema:
+            type: string
+            default: ""
+          required: false
+        - name: id
+          in: path
+          description: A valid meeting ID
+          example: "6bbf64a9e13844d1d140d6e2"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/ProductMeetingObject'
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
+    delete:
+      summary: Deletes a meeting.
+      description: Deletes a specific meeting.
+      tags:
+      - Meetings
+      security:
+        - oauth2: []
+      parameters: 
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked
+          schema:
+            type: string
+            default: ""
+          required: false
+        - name: id
+          in: path
+          description: A valid meeting ID
+          example: "6bbf64a9e13844d1d140d6e2"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/ProductMeetingDeletedObject'
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
+
+  "/management/users":
+    get:
+      summary: Retrieves a list of users.
+      description: Retrieves a list of users. Only users that you have access to will
+        be returned.
+      tags:
+      - Users
+      security:
+        - oauth2: []
+      parameters:
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked
+          schema:
+            type: string
+            default: ""
+          required: false
+      responses:
+        200:
+          $ref: '#/components/responses/UserObjectArray'
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
+
+    post:
+      summary: Creates a new user.
+      description: Creates a new user.
+      tags:
+      - Users
+      security:
+        - oauth2: []
+      parameters:
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked
+          schema:
+            type: string
+            default: ""
+          required: false
+      requestBody:
+        description: The user to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+                  description: Either `admin` or `agent`.
+                email:
+                  type: string
+                locale:
+                  type: string
+                  description: Either `nl` or `en`.
+      responses:
+        200:
+          $ref: '#/components/responses/UserObject'        
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
+  "/management/users/{id}":
+    get:
+      summary: Retrieves a user.
+      description: Retrieves a specific user. You need at least company admin privileges to use this endpoint. Replace {id} with the id attribute of a user.          
+      tags:
+      - Users
+      security:
+        - oauth2: []
+      parameters:
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked
+          schema:
+            type: string
+            default: ""
+          required: false
+        - name: id
+          in: path
+          description: A valid user ID
+          required: true
+          schema:
+            type: string
+        - name: user_status
+          in: query
+          description: Add user status into response
+          required: false
+          schema:
+            type: boolean
+      responses:
+        200:
+          $ref: '#/components/responses/UserObject'
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
+    put:
+      summary: Updates a user.
+      description: Update a specific user. You need at least company admin privileges to use this endpoint. Replace {id} with the id attribute of a user.
+      tags:
+      - Users
+      security:
+        - oauth2: []
+      parameters:
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked
+          schema:
+            type: string
+            default: ""
+          required: false
+        - name: id
+          in: path
+          description: A valid user ID
+          required: true
+          schema:
+            type: string
+        - name: user_status
+          in: query
+          description: Add user status into response
+          required: false
+          schema:
+            type: boolean
+      requestBody:
+        description: The user to update.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                locale:
+                  type: string
+                  description: Either `nl` or `en`.
+      responses:
+        200:
+          $ref: '#/components/responses/UserObject'
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
+    patch:
+      summary: Updates a user.
+      description: Update a specific user. You need at least company admin privileges to use this endpoint. Replace {id} with the id attribute of a user.
+      tags:
+      - Users
+      security:
+        - oauth2: []
+      parameters:
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked
+          schema:
+            type: string
+            default: ""
+          required: false
+        - name: id
+          in: path
+          description: A valid user ID
+          required: true
+          schema:
+            type: string
+        - name: user_status
+          in: query
+          description: Add user status into response
+          required: false
+          schema:
+            type: boolean
+      requestBody:
+        description: The user to update.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                locale:
+                  type: string
+                  description: Either `nl` or `en`.
+      responses:
+        200:
+          $ref: '#/components/responses/UserObject'
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
+    delete:
+      summary: Deletes a user.
+      description: Deletes a specific user. You need at least company admin privileges to use this endpoint. Replace {id} with the id attribute of a user.
+      tags:
+      - Users
+      security:
+        - oauth2: []
+      parameters:
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked
+          schema:
+            type: string
+            default: ""
+          required: false
+        - name: id
+          in: path
+          description: A valid user ID
+          required: true
+          schema:
+            type: string
+        - name: user_status
+          in: query
+          description: Add user status into response
+          required: false
+          schema:
+            type: boolean
+      responses:
+        200:
+          $ref: '#/components/responses/UserDeletedObject'
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
+  '/auth/autologin':
+    post:
+      summary: Auto sign in user with role agent or agent assistent.
+      description: >-
+        Sign in a user with role agent or agent_assistent and receive URLs to access the agent dashboard. Your client need to have permissions for given agent ID in request body. In case you are already signed in as agent with OAuth2, you will still receive the URLs to access the agent dashboard.
+      tags:
+        - Autologin
+      security:
+        - oauth2: []
+      parameters:
+        - in: header
+          name: api-version
+          description: if left blank, the latest version will be invoked
+          schema:
+            type: string
+            default: ""
+          required: false
+      requestBody:
+        description: The user to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                agent:
+                  type: string
+                  example: 58f6ee406a2308a38ca39dec
+                product:
+                  type: string
+                  example: direct
+      responses:
+        200:
+          $ref: '#/components/responses/AuthAutoLoginUserObject'
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        403:
+          $ref: '#/components/responses/forbidden'
+        404:
+          $ref: '#/components/responses/not_found'
+        405:
+          $ref: '#/components/responses/method_not_allowed'
+        412:
+          $ref: '#/components/responses/precondition_failed'
+        429:
+          $ref: '#/components/responses/too_many'
+        500:
+          $ref: '#/components/responses/server_error'
+        502:
+          $ref: '#/components/responses/bad_gateway'
+        503:
+          $ref: '#/components/responses/service_unavailable'
